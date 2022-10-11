@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load mptt_tags %}
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock %}
+{% block slider_category %}
+
+    <div class="slider">
+        {% for sc in categories %}
+            <div class="slider__item">
+                <img src="media/{{ sc.cat_img }}" alt="{{ sc.title }}">
+             </div>
+        {% endfor %}
+    </div>
+{% endblock %}

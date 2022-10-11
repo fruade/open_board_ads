@@ -1,0 +1,315 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /*font-family: 'Lato', sans-serif;*/
+    font-size: 14px;
+    color: #353535;
+  }
+
+.login100-social-item i {
+    color: #fff;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  min-width: 100%;
+  display: grid;
+  grid-template: minmax(50px, auto) 1fr minmax(100px, auto) / 1fr;
+  grid-template-areas:
+    "header"
+    "slider"
+    "main"
+    "footer"
+}
+
+
+.select_category li {
+  width: 200px;
+  list-style: none;
+  background: #383c54;
+  position: relative;
+}
+
+.select_category a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 0 10px;
+  height: 40px;
+  line-height: 40px;
+  transition: all .5s;
+
+}
+
+.select_category:hover {
+  background: #808291;
+}
+
+.select_category ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  padding: 0;
+}
+
+.select_category:hover ul {
+  display: block;
+}
+
+
+
+.slider, .slider_small {
+  position: relative;
+  min-width: 0;
+  grid-area: slider;
+  max-width: 100%;
+}
+
+.slider_small .slick-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  font-size: 0;
+  width: 20px;
+  height: 30px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.slider_small:hover .slick-arrow {
+  opacity: 1;
+}
+
+
+.slider_small .slick-prev {
+  left: 0%; 
+  color: #353535;
+}
+
+.slider_small .slick-next {
+  right: 0%;
+  color: #353535;
+}
+
+img .slick-prev, .slick-next {
+  width: 15px;
+  height: 22px;
+}
+
+.slider__item {
+  text-align: center;
+  padding: 0 5px;
+}
+
+.slider img {
+  width: 200px;
+  height: 150px;
+}
+.slick-list {
+  overflow: hidden;
+}
+
+.slick-track {
+  display: flex;
+}
+
+.slider .slick-arrow {
+  position: absolute;
+  top: 40%;
+  z-index: 10;
+  font-size: 0;
+  width: 20px;
+  height: 30px;
+
+}
+
+.slider .slick-prev {
+  left: 9%;
+}
+
+.slider .slick-next {
+  right: 9%;
+}
+
+
+.slider .slick-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider .slick-dots li{
+  list-style: none;
+  margin: 0px 5px;
+}
+
+.slider .slick-dots button {
+  font-size: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #000;
+}
+
+.slider .slick-dots li.slick-active button {
+  background-color: #c19a5a;
+}
+
+.card {
+  -webkit-box-shadow: 4px 4px 4px 0px rgba(71, 74, 77, 0.29);
+  -moz-box-shadow: 4px 4px 4px 0px rgba(71, 74, 77, 0.29);
+  box-shadow: 4px 4px 4px 0px rgba(71, 74, 77, 0.29);
+}
+
+.card-favorite {
+  width: 33px;
+  height: 33px;
+  position: absolute;
+  bottom: 9px;
+  right: 12px;
+  background-color: #f9f5ef;
+  border-radius: 50%;
+  padding: 5px;
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+
+.card-favorite:hover {
+  background-color: #dfa953;
+}
+
+.card-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 10px 10px;
+}
+
+.card-title {
+  grid-column-start: 1;
+  grid-column-end: -1;
+}
+
+.card-time-create {
+  grid-column-start: 1;
+  grid-column-end: -1;
+  color: #c0c0c0;
+}
+
+.card-detail {
+  margin: 3px 3px;
+}
+
+.card-detail:last-child {
+  margin-bottom: 4px;
+}
+
+.card-price {
+  font-weight: bold;
+  justify-self: left;
+}
+
+.card-city {
+  justify-self: right;
+}
+
+.header__menu {
+  text-transform: uppercase;
+  font-size: 10px;
+  grid-area: header;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 20px;
+  align-items: center;
+  justify-items: right;
+}
+
+
+.item-menu:first-child {
+  justify-self: start;
+}
+
+
+a {
+  text-decoration: none;
+  color: #353535;;
+}
+
+.header__menu a:hover {
+  color: #c19a5a;
+}
+
+.logo img {
+  object-fit: fill;
+}
+
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+  justify-items: end;
+}
+
+
+
+header, main, footer, .slider {
+  padding: 20px 10%;
+  background: #f9f5ef;
+}
+
+
+main {
+  display: grid;
+  grid-gap: 25px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(1fr, 370px));
+  
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0 50px #fff; /* цвет вашего фона */
+    -webkit-text-fill-color: #353535; /* цвет текста */
+}
+
+.card {
+  position: relative;
+  border: 1px solid #353535;
+  border-radius: 5px;
+  background-color: #f9f5ef;
+}
+
+.card img {
+  width: 100%;
+  height: 260px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+
+
+@media(max-width: 1148px) {
+  header, main, footer {
+    padding: 20px 5%;
+  }
+}
+
+
+@media(max-width: 764px) {
+  header, main, footer {
+    padding: 20px 3%;
+  }
+}
+
+@media(max-width: 652px) {
+  header, main, footer {
+    padding: 20px 20%;
+  }
+}
+
