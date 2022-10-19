@@ -7,6 +7,10 @@
     color: #353535;
   }
 
+.alert-error {
+    color: red;
+}
+
 .login100-social-item i {
     color: #fff;
 }
@@ -25,6 +29,42 @@
     "footer"
 }
 
+.location {
+    position: relative;
+}
+
+select .input100 {
+    border: none;
+}
+
+.geo {
+  position: absolute;
+  left: 0;
+  top: 10%;
+}
+
+#ip_city {
+    background: #f9f5ef;
+    width: 100%;
+    text-transform: uppercase;
+    font-family: Poppins-Regular;
+    padding-left: 25px;
+}
+
+#ip_city:hover{
+    stroke: #c19a5a;
+    color: #c19a5a;
+    transition: all .5s;
+    cursor: pointer;
+}
+
+.geo:hover {
+    cursor: pointer;
+}
+
+#ip_city:focus {
+    background: white;
+}
 
 .select_category li {
   width: 200px;
@@ -240,7 +280,7 @@ a {
   color: #353535;;
 }
 
-.header__menu a:hover {
+.header__menu a:hover{
   color: #c19a5a;
 }
 

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load account %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block content %}
+
+{% if confirmation %}
+{% user_display confirmation.email_address.user as user_display %}
+	<div class="content100-form">
+		<form method="POST" action="{% url 'account_confirm_email' confirmation.key %}">
+			<span class="login100-form-title p-b-35 p-t-35">
+				Подтверждение адреса электронной почты
+			</span>
+            {% csrf_token %}
+            <div style="display: grid; justify-content: center;" >
+                <div style="width: 300px; text-align: center; font-size: 16px" class="p-b-35">
+                    Пожалуйста, подтвердите адрес электронной почты для пользователя <strong>{{ user_display }}</strong> .
+                </div>
+            </div>
+
+			<div class="container-login100-form-btn">
+				<div class="wrap-login100-form-btn">
+					<div class="login100-form-bgbtn"></div>
+					<button type="submit" class="login100-form-btn">
+						Подтвердить
+					</button>
+				</div>
+			</div>
+        </form>
+	</div>
+
+{% else %}
+
+{% url 'account_email' as email_url %}
+
+    <div class="content100-form" style="align-items: center; align-content: space-evenly;">
+        <span class="login100-form-title p-b-35 p-t-35">
+            Подтвердите email адрес.
+        </span>
+        <div style="display: grid; justify-content: center;" >
+            <div style="width: 300px; text-align: center; font-size: 16px">
+                Срок действия этой ссылки для подтверждения по электронной почте истек или она недействительна. Пожалуйста <a href="{{ email_url }}">отправьте новый запрос подтверждения по электронной почте</a>.
+            </div>
+        </div>
+	</div>
+
+
+{% endif %}
+
+{% endblock %}
