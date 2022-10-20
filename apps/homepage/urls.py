@@ -5,6 +5,6 @@ from apps.homepage.views import HomePageView
 
 
 urlpatterns = [
-    path('', HomePageView.as_view()),
+    path('', HomePageView.as_view(), name='homepage'),
 ]
 

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sites',
 
+    'debug_toolbar',
     'widget_tweaks',
     'allauth',
     'allauth.account',
@@ -59,8 +60,6 @@ INSTALLED_APPS = [
     'apps.homepage.apps.HomepageConfig',
     'apps.ads.apps.AdsConfig',
     'apps.categories.apps.CategoriesConfig',
-    'apps.location.apps.LocationConfig',
-    'apps.menu.apps.MenuConfig',
     'apps.user.apps.UserConfig',
     'phonenumber_field',
 ]
@@ -70,6 +69,9 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -112,6 +114,10 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -171,11 +177,13 @@ ACCOUNT_FORMS = {
     'signup': 'apps.user.forms.MySignupForm',
 }
 
+SILENCED_SYSTEM_CHECKS = ["auth.W004"]
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_ADAPTER = 'apps.user.adapters.MyAccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'apps.user.adapters.MySocialAccountAdapter'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = None
 SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_EMAIL_VERIFICATION = None
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_REQUIRED = True

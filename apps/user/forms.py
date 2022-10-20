@@ -12,10 +12,12 @@ class MySignupForm(SignupForm):
         region='RU',
         widget=PhoneNumberPrefixWidget(initial='RU'),
     )
+    city = forms.CharField()
 
     def save(self, request):
         user = super(MySignupForm, self).save(request)
         user.phone_number = self.cleaned_data["phone_number"]
+        user.city = self.cleaned_data['city']
         user.save()
         return user
 

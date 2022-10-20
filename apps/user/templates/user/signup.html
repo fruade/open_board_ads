@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load account %}
+{% load account socialaccount %}
+{% providers_media_js %}
+{% block content %}
+	<div class="content100-form">
+		<form action="{% url 'account_signup' %}" method="POST" class="login login100-form">
+			<span class="login100-form-title p-b-35 p-t-35">
+				Регистрация
+			</span>
+			{% csrf_token %}
+			{% if form.errors %}
+				{% for field in form %}
+					{% for error in field.errors %}
+						<div class="alert alert-error">
+							{{ error|escape }}
+						</div>
+					{% endfor %}
+				{% endfor %}
+				{% for error in form.non_field_errors %}
+					<div class="alert alert-error">
+						{{ error|escape }}
+					</div>
+				{% endfor %}
+			{% endif %}
+			<div class="wrap-input100 m-b-23">
+				<span class="label-input100">Имя пользователя</span>
+				{% render_field form.username class="input100" placeholder="Введите имя пользователя" %}
+				<span class="focus-input100" data-symbol="&#xf206;"></span>
+			</div>
+			<div class="wrap-input100 m-b-23">
+				<span class="label-input100">Адрес электронной почты</span>
+				{% render_field form.email class="input100" placeholder="Введите адрес электронной почты" %}
+				<span class="focus-input100" data-symbol="&#9993;"></span>
+			</div>
+			<div class="wrap-input100 m-b-23 phone_input">
+				<span class="label-input100">Номер телефона</span>
+				{% render_field form.phone_number class="input100 select_phone" style="height: 25px;" placeholder="Введите номер телефона" %}
+				<span style="top: 16%;"  class="focus-input100" data-symbol="&#9743;"></span>
+			</div>
+			<div class="wrap-input100 m-b-23">
+				<span class="label-input100">Город</span>
+				{% render_field form.city class="input100 city" name="city" id="register_city" placeholder="Введите ваш город" %}
+				<span style="top: -4%; left: 1%;" class="focus-input100" data-symbol="&#8962;"></span>
+			</div>
+			<div class="wrap-input100 m-b-23">
+				<span class="label-input100">Пароль</span>
+				{% render_field form.password1 class="input100" placeholder="Введите пароль" %}
+				<span class="focus-input100" data-symbol="&#xf190;"></span>
+			</div>
+			<div class="wrap-input100 m-b-23">
+				<span class="label-input100">Повторите пароль</span>
+				{% render_field form.password2 class="input100" placeholder="Введите пароль еще раз" %}
+				<span class="focus-input100" data-symbol="&#xf190;"></span>
+			</div>
+			<div class="container-login100-form-btn p-t-54">
+				<div class="wrap-login100-form-btn">
+					<div class="login100-form-bgbtn"></div>
+					<button type="submit" class="login100-form-btn">
+						Зарегистрироваться
+					</button>
+				</div>
+			</div>
+			<div class="flex-col-c p-t-25">
+				<span class="txt1">
+					ИЛИ
+				</span>
+			</div>
+			<div class="txt1 text-center p-t-20 p-b-20">
+				<span class="txt2">
+					ВОЙТИ С ПОМОЩЬЮ
+				</span>
+			</div>
+
+			<div class="flex-c-m">
+				<a href="{% provider_login_url 'vk' method='js_sdk' %}" class="login100-social-item bg1">
+					<i class="fa fa-vk"></i>
+
+				</a>
+
+				<a href="{% provider_login_url 'odnoklassniki' method='js_sdk' %}" class="login100-social-item bg2">
+					<i class="fa fa-odnoklassniki"></i>
+				</a>
+
+				<a href="{% provider_login_url 'google' method='js_sdk' %}" class="login100-social-item bg3">
+					<i class="fa fa-google"></i>
+				</a>
+			</div>
+		</form>
+	</div>
+{% endblock %}
