@@ -34,13 +34,14 @@ LOGOUT_REDIRECT_URL = '/'
 # Application definition
 
 INSTALLED_APPS = [
+    'related_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.messages',
     'django.contrib.sites',
-
+    'sorl.thumbnail',
     'debug_toolbar',
-    'widget_tweaks',
+    'django_cleanup.apps.CleanupConfig',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -51,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
-
+    'widget_tweaks',
     'rest_framework',
     'django_mptt_admin',
     'django_filters',
@@ -61,7 +62,12 @@ INSTALLED_APPS = [
     'apps.ads.apps.AdsConfig',
     'apps.categories.apps.CategoriesConfig',
     'apps.user.apps.UserConfig',
+    'apps.favorites.apps.FavoritesConfig',
+    'apps.messages_my.apps.MessagesMyConfig',
+    'apps.feedback.apps.FeedbackConfig',
     'phonenumber_field',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -69,15 +75,14 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'open_ads.urls'
+FILE_UPLOAD_MAX_MEMORY_SIZE = 30 * 1024 * 1024
 
 TEMPLATES = [
     {
@@ -125,6 +130,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -178,6 +186,7 @@ ACCOUNT_FORMS = {
 }
 
 SILENCED_SYSTEM_CHECKS = ["auth.W004"]
+
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_ADAPTER = 'apps.user.adapters.MyAccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'apps.user.adapters.MySocialAccountAdapter'
@@ -197,12 +206,12 @@ EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'open-ads@yandex.ru'
-EMAIL_HOST_PASSWORD = 'tafqesbvkudobcfl'
+EMAIL_HOST_PASSWORD = 'ayukloqoeueedcdf'
 DEFAULT_FROM_EMAIL = 'open-ads@yandex.ru'
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Yekaterinburg'
 
 USE_I18N = True
 

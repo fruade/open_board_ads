@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block content %}
+	<div class="content100-form">
+		<form method="POST">
+			<span class="login100-form-title p-b-35 p-t-35">
+				Удаление
+			</span>
+            {% csrf_token %}
+            <div style="display: grid; justify-content: center;" >
+                <div style="width: 300px; text-align: center; font-size: 16px" class="p-b-35">
+                    Вы уверены, что хотите удалить?
+                </div>
+            </div>
+
+			<div class="container-login100-form-btn">
+				<div class="wrap-login100-form-btn">
+					<div class="login100-form-bgbtn-del"></div>
+					<button type="submit" class="login100-form-btn">
+						Удалить
+					</button>
+				</div>
+			</div>
+        </form>
+	</div>
+
+
+{% endblock %}

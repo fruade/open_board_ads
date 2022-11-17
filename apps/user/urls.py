@@ -6,13 +6,15 @@ from django.conf.urls.static import static
 from apps.homepage.views import HomePageView
 from apps.user.views import (
     MyLoginView, MySignupView, MyPasswordResetView, MyPasswordResetDoneView, MyPasswordResetFromKeyView,
-    MyPasswordResetFromKeyDoneView, MyEmailVerificationSentView, MyConfirmEmailView
+    MyPasswordResetFromKeyDoneView, MyEmailVerificationSentView, MyConfirmEmailView, MyPasswordChangeView,
+    MyPasswordChangeDoneView, MyProfileView
 )
 
 
 urlpatterns = [
     path("accounts/signup/", MySignupView.as_view(), name="account_signup"),
     path("accounts/login/", MyLoginView.as_view(), name="account_login"),
+    path('profile/<int:pk>/', MyProfileView.as_view(), name="account_profile"),
     path("accounts/password/reset/", MyPasswordResetView.as_view(), name="account_reset_password"),
     path("accounts/password/reset/done/", MyPasswordResetDoneView.as_view(), name="account_reset_password_done"),
     re_path(
@@ -28,15 +30,6 @@ urlpatterns = [
         r"^accounts/confirm-email/(?P<key>[-:\w]+)/$",
         MyConfirmEmailView.as_view(), name="account_confirm_email",
     ),
-    # path(
-    #     "password/change/",
-    #     views.password_change,
-    #     name="account_change_password",
-    # ),
-    # path("password/set/", views.password_set, name="account_set_password"),
-    # path("inactive/", views.account_inactive, name="account_inactive"),
-    # # E-mail
-    # path("email/", views.email, name="account_email"),
-
-
+    path("accounts/password/change/", MyPasswordChangeView.as_view(), name="account_change_password"),
+    path("accounts/password/change/done", MyPasswordChangeDoneView.as_view(), name="account_change_password_done"),
 ]

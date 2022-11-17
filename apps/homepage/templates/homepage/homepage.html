@@ -1,108 +1,94 @@
 {% extends 'base.html' %}
-
 {% load static %}
+{% load widget_tweaks %}
+{% load digit_capacity %}
+{% load thumbnail %}
 {% load mptt_tags %}
 {% block title %}
-    <title>{{ title }}</title>
+    {{ title }}
 {% endblock %}
 
-{% block search_items %}
-    <div class="search-items">
-        <div class="select-category">
-            Выберите категорию
-        </div>
-
-        <div class="select-text">
-
-        </div>
-
-        <div class="select-city">
-            <input id="search_city" class="city city_header" name="city" type="text" placeholder="Введите город"/>
-        </div>
-        <div class="select-search-btn">
-            <button type="submit">Поиск</button>
-        </div>
-    </div>
-
+{% block search %}
+    {% include 'inc/block_search.html' %}
 {% endblock %}
-
 
 {% block slider_category %}
-    <div class="slider">
-        {% for sc in categories %}
-            <div class="slider__item">
-                <a href="categories/{{ sc.slug }}">
-                <img src="" alt="{{ sc.title }}">
-<!--                <img src="media/{{ sc.cat_img }}" alt="{{ sc.title }}">-->
-                </a>
-             </div>
-        {% endfor %}
-    </div>
+    {% include 'inc/block_slider_categories.html' %}
 {% endblock %}
 
+
 {% block card %}
-    <div class="card">
-        <div class="card-favorite">
-            <a href="#">
-                <svg fill="#353535" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --><path d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"/></svg>
-            </a>
-        </div>
-        <div class="slider_small">
-            <div class="slider__item_small">
-                <img data-lazy="{% static 'homepage/img/slider_item_img/IMG_3744.jpg' %}" alt="фото товара">
-            </div>
-            <div class="slider__item_small">
-                <img data-lazy="{% static 'homepage/img/slider_item_img/IMG_3601.jpg' %}" alt="фото товара">
-            </div>
-            <div class="slider__item_small">
-                <img data-lazy="{% static 'homepage/img/slider_item_img/IMG_3630.jpg' %}" alt="фото товара">
-            </div>
-            <div class="slider__item_small">
-                <img data-lazy="{% static 'homepage/img/slider_item_img/IMG_3627.jpg' %}" alt="фото товара">
-            </div>
-        </div>
-        <a href="#">
-            <div class="card-info">
-                    <div class="card-detail card-price">1000 ₽</div>
-                    <div class="card-detail card-city">Нижний Новгород</div>
-                    <div class="card-detail card-title">Название товара</div>
-                    <div class="card-detail card-time-create">Сегодня 21:51</div>
+    {% if page_obj %}
 
-            </div>
-        </a>
-    </div>
-    <div class="card">item-2</div>
-    <div class="card">item-3</div>
-    <div class="card">item-4</div>
-    <div class="card">item-5</div>
-    <div class="card">
-        <div class="card-favorite">
-            <a href="#">
-                <svg fill="#353535" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --><path d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"/></svg>
-            </a>
-        </div>
-        <div class="slider_small">
-            <div class="slider__item_small">
-                <img data-lazy="{% static 'homepage/img/slider_item_img/IMG_3744.jpg' %}" alt="фото товара">
-            </div>
-            <div class="slider__item_small">
-                <img data-lazy="{% static 'homepage/img/slider_item_img/IMG_3601.jpg' %}" alt="фото товара">
-            </div>
-            <div class="slider__item_small">
-                <img data-lazy="{% static 'homepage/img/slider_item_img/IMG_3630.jpg' %}" alt="фото товара">
-            </div>
-            <div class="slider__item_small">
-                <img data-lazy="{% static 'homepage/img/slider_item_img/IMG_3627.jpg' %}" alt="фото товара">
-            </div>
-        </div>
-        <a href="#">
-            <div class="card-info">
-                    <div class="card-detail card-price">1000 ₽</div>
-                    <div class="card-detail card-city">Нижний Новгород</div>
-                    <div class="card-detail card-title">Название товара</div>
-                    <div class="card-detail card-time-create">Сегодня 21:51</div>
+        {% for item in page_obj %}
+<!--                {{ item.id_category.get_ancestors|tree_path:" > " }}-->
+            <div class="card">
+                {% if item.id_user.id != user.id %}
+                    <div class="card-favorite" >
+                        <svg data-type="{{ item.slug }}" data-id="{{ item.id }}" fill="#353535" class="add-to-favorites" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"/></svg>
+                    </div>
+                {% else %}
+                    <div class="card-update" >
+                        <a href="{{ item.get_absolute_url }}update/"><span class="update-symbol">✎</span></a>
+                    </div>
+                {% endif %}
 
+                <div class="slider_small">
+
+                    {% for photo in item.photos.all %}
+                        <div class="slider__item_small">
+                            {% thumbnail photo.card_img "286x260" crop="center" as img %}
+                                <img data-lazy="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}">
+                            {% endthumbnail %}
+                        </div>
+                    {% endfor %}
+
+                </div>
+                    {% if item.id_user.id == user.id %}
+                        <a href="{{ item.get_absolute_url }}update/">
+                    {% else %}
+                        <a href="{{ item.get_absolute_url }}">
+                    {% endif %}
+                    <div class="card-info">
+                            <div class="card-detail card-price">{{ item.price|digit_cap }} ₽</div>
+                            <div class="card-detail card-city">{{ item.id_user.city }}</div>
+                            <div class="card-detail card-title">{{ item.title }}</div>
+                            <div class="card-detail card-time-create">{{ item.date_add|date:"d M Y H:i" }}</div>
+
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
+        {% endfor %}
+    {% else %}
+        <div class="content100-form" style="align-content: space-evenly;">
+            <div style="display: grid;" >
+                <div style="font-size: 16px; " class="p-b-35">
+                    По вашему запросу ничего не найдено.
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block pagination %}
+   <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1"><img src="{% static 'homepage/img/pagination/left-arrows_icon-icons.com_70075.png' %}" alt=""></a>
+                <a href="?page={{ page_obj.previous_page_number }}"><img src="{% static 'homepage/img/pagination/left-arrow-2_icon-icons.com_70082.png' %}" alt=""></a>
+            {% endif %}
+
+            <span class="current" style="font-size: 16px;">
+                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}"><img src="{% static 'homepage/img/pagination/right-arrow_icon-icons.com_69953.png' %}" alt=""></a>
+                <a href="?page={{ page_obj.paginator.num_pages }}"><img src="{% static 'homepage/img/pagination/right-arrows_icon-icons.com_69943.png' %}" alt=""></a>
+            {% endif %}
+        </span>
+   </div>
+{% endblock %}
+
+{% block footer %}
+    {% include 'inc/block_footer.html' %}
 {% endblock %}

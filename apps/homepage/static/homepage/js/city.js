@@ -57,8 +57,13 @@ $( document ).ready(function(){
       .then(({ city, ip }) => {
 //        console.log(city, ip);
         document.getElementById("ip_city").value = city;
-        document.getElementById("register_city").value = city;
-        document.getElementById("search_city").value = city;
+        if (document.getElementById("search_city")) {
+            document.getElementById("search_city").value = city;
+        }
+//        if (document.getElementById("register_city")) {
+//            document.getElementById("register_city").value = city;
+//        }
+
       })
       .catch(err => {
         console.log(err);

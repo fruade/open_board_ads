@@ -8,6 +8,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.homepage.urls')),
     path('', include('apps.user.urls')),
+    path('', include('apps.ads.urls')),
+    path('', include('apps.categories.urls')),
+    path('', include('apps.messages_my.urls')),
+    path('feedback/', include('apps.feedback.urls')),
+    path('favorites/', include('apps.favorites.urls')),
     path('accounts/', include('allauth.urls')),
 ]
 

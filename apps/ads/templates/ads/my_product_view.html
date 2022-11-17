@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load thumbnail %}
+{% load digit_capacity %}
+{% block content %}
+	<div class="content100-form" style="align-items: center; align-content: space-evenly;">
+        <span class="login100-form-title p-b-35 p-t-35">
+            Мои объявления
+        </span>
+	</div>
+    {% if not card %}
+        <div style="display: grid; justify-content: center;" >
+            <div style="width: 300px; text-align: center; font-size: 16px" class="p-b-35">
+                Активных объявлений нет. Чтобы создать объявление, нажмите <a href="{% url 'card_product_create' %}">ПОДАТЬ ОБЪЯВЛЕНИЕ</a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block card %}
+    {% for item in page_obj %}
+        <div class="card">
+
+                    <div class="card-update" >
+                        <a href="{{ item.get_absolute_url }}update/"><span class="update-symbol">✎</span></a>
+                    </div>
+
+            <div class="slider_small">
+                {% for photo in item.photos.all %}
+                    <div class="slider__item_small">
+                        {% thumbnail photo.card_img "286x260" crop="center" as img %}
+                            <img data-lazy="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}">
+                        {% endthumbnail %}
+                    </div>
+
+                {% endfor %}
+            </div>
+                {% if item.id_user.id == user.id %}
+                    <a href="{{ item.get_absolute_url }}update/">
+                {% else %}
+                    <a href="{{ item.get_absolute_url }}">
+                {% endif %}
+                <div class="card-info">
+                        <div class="card-detail card-price">{{ item.price|digit_cap }} ₽</div>
+                        <div class="card-detail card-city">{{ item.id_user.city }}</div>
+                        <div class="card-detail card-title">{{ item.title }}</div>
+                        <div class="card-detail card-time-create">{{ item.date_add|date:"d M Y H:i" }}</div>
+
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block pagination %}
+    {% if page_obj %}
+        <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1"><img src="{% static 'homepage/img/pagination/left-arrows_icon-icons.com_70075.png' %}" alt=""></a>
+            <a href="?page={{ page_obj.previous_page_number }}"><img src="{% static 'homepage/img/pagination/left-arrow-2_icon-icons.com_70082.png' %}" alt=""></a>
+        {% endif %}
+
+        <span class="current" style="font-size: 16px;">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"><img src="{% static 'homepage/img/pagination/right-arrow_icon-icons.com_69953.png' %}" alt=""></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}"><img src="{% static 'homepage/img/pagination/right-arrows_icon-icons.com_69943.png' %}" alt=""></a>
+        {% endif %}
+    </span>
+</div>
+    {% endif %}
+{% endblock %}
+
+
+

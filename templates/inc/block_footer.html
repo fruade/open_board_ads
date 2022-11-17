@@ -1,0 +1,25 @@
+{% load widget_tweaks %}
+{% load static %}
+{% load thumbnail %}
+{% load mptt_tags %}
+
+<div class="footer_cat">
+    {% for sc in categories_for_slider %}
+        <div class="slider__item">
+            <a href="?id_category={{ sc.id }}">
+            <img src="media/{{ sc.cat_img }}" alt="{{ sc.title }}">
+            <div>{{ sc.title }}</div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+<div class="footer_feedback">
+    <div class="container-login100-form-btn m-t-35">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <a href="{% url 'feedback' %}" class="login100-form-btn">
+                Оставить отзыв
+            </a>
+        </div>
+    </div>
+</div>

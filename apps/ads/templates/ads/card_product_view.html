@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load thumbnail %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div id="wrap-grid">
+    <div class="container-card-view">
+		<div class="card-header2">
+			<h1>{{ object.title }}</h1>
+		</div>
+        <div class="card-slider">
+			<div class="slider_small">
+				{% for photo in object.photos.all %}
+					<div class="slider__item_small">
+						{% thumbnail photo.card_img "350x350" crop="center" as img %}
+							<img data-lazy="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}">
+						{% endthumbnail %}
+					</div>
+				{% endfor %}
+        	</div>
+        </div>
+        <div class="card-author-info">
+			<div class="description-field price">Цена: {{ object.price }} ₽</div>
+			<div class="description-field call">
+				<div class="container-login100-form-btn">
+					<div class="wrap-login100-form-btn">
+						<div class="login100-form-bgbtn"></div>
+						<button type="submit" class="login100-form-btn" id="call-btn-text" name="btnformlogin">
+							Показать телефон
+						</button>
+						<button style="display: none" type="submit" class="login100-form-btn" id="call-btn-phone" name="btnformlogin">
+							{{ phone }}
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="description-field message">
+				<div class="container-login100-form-btn ">
+					<div class="wrap-login100-form-btn">
+						<div class="login100-form-bgbtn-message"></div>
+						<a class="login100-form-btn" href="{% url 'create_dialog' object.id_user.id %}">Написать</a>
+					</div>
+				</div>
+			</div>
+			<div class="description-field author">{{ object.id_user.username|upper }}</div>
+			<div class="description-field author-date">на сайте с {{ object.id_user.date_joined|date:"d.m.Y" }}</div>
+			<div class="description-field city">{{ object.id_user.city }}</div>
+			<div class="description-field confirmed">
+				<svg width="24" height="24" viewBox="0 0 24 24"><g fill-rule="nonzero" fill="none"><path fill="#77C226" d="M12 .6l-9 4v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12v-6l-9-4"></path><path fill="#FFF" d="M12 12.07c3.29 0 6 1.32 6 3-.24.53-.53 1.03-.87 1.53A9.69 9.69 0 0 1 12 20.52a9.69 9.69 0 0 1-5.13-3.92c-.34-.5-.63-1-.87-1.53 0-1.65 2.71-3 6-3zm0-7.47a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"></path></g></svg>
+				Профиль подтвержден
+			</div>
+
+        </div>
+		<div class="card-description p-b-15">
+			<h5>{{ object.description }}</h5>
+		</div>
+		<div class="card-condition">
+			Состояние: {{ object.condition }}
+		</div>
+		<div class="card-date-add">
+			Опубликовано: {{ object.date_add|date:"d M Y H:i" }}
+		</div>
+    </div>
+</div>
+
+<script src="{% static 'ads/js/show_number.js' %}"></script>
+{% endblock %}
+
+
+
+
