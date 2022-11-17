@@ -1,0 +1,30 @@
+{% load widget_tweaks %}
+{% load static %}
+{% load thumbnail %}
+{% load mptt_tags %}
+<form action="" method="GET" enctype='multipart/form-data'>
+        <div class="search">
+            <div class="search-items">
+                <div class="select-category">
+                    {% render_field filter.form.id_category class="form-select" placeholder="Выберите категорию" %}
+                </div>
+
+                <div class="select-text">
+                    {% render_field filter.form.title placeholder="Поиск по объявлениям" %}
+                </div>
+
+                <div class="select-city">
+                    {% render_field filter.form.id_user__city id="search_city" class="city" name="city" placeholder="Введите город" style="width: 100%; height: 100%" %}
+                </div>
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn" style="border-radius: 5px; height: 45px">
+                        <div class="login100-form-bgbtn"></div>
+                        <button type="submit" class="login100-form-btn" style="height: 100%; " name="btnformlogin">
+                            Найти
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</form>

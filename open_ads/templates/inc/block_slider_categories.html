@@ -1,0 +1,14 @@
+{% load widget_tweaks %}
+{% load static %}
+{% load thumbnail %}
+{% load mptt_tags %}
+<div class="slider">
+    {% for sc in categories_for_slider %}
+        <div class="slider__item">
+            <a href="?id_category={{ sc.id }}">
+            <img src="media/{{ sc.cat_img }}" alt="{{ sc.title }}">
+            <div>{{ sc.title }}</div>
+            </a>
+         </div>
+    {% endfor %}
+</div>

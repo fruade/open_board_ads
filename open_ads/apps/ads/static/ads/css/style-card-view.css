@@ -1,0 +1,152 @@
+#wrap-grid {
+    justify-content: center;
+    padding: 0 30%;
+}
+
+.container-card-view {
+    font-family: Poppins-Regular, Lato-Regular;
+    justify-content: center;
+    grid-gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "hd hd"
+        "ph op"
+        "cd dt"
+        "ds ds";
+
+}
+
+.card-slider, .card-author-info {
+    width: 350px;
+    height: 350px;
+}
+
+.description-field {
+    padding: 8px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.confirmed {
+    position: relative;
+    padding-left: 30px;
+    padding-top: 0;
+}
+
+.confirmed svg {
+    position: absolute;
+    left: 73px;
+}
+
+.author-date {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 18px;
+}
+.wrap-description .call .wrap-login100-form-btn {
+    width: 80%;
+}
+
+.wrap-description .message .wrap-login100-form-btn {
+    width: 80%;
+}
+
+.login100-form-bgbtn-message {
+  position: absolute;
+  z-index: -1;
+  width: 300%;
+  height: 100%;
+  background-color: #CFB957;
+  top: 0;
+  left: -100%;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.card-author-info .price {
+    margin-top: 10px;
+    font-size: 19px;
+}
+
+.card-author-info {
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+
+#wrap-grid > div > div.card-slider > div > div > div > div > img {
+    border-radius: 5px;
+    border: 2px solid grey;
+}
+#wrap-grid .container-card-view .card-title {
+    margin-top: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.card-header2 {
+    grid-area: hd;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.card-slider {
+    grid-area: ph;
+}
+
+.card-author-info {
+    grid-area: op;
+}
+
+.card-description {
+    grid-area: ds;
+
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: justify;
+}
+
+.card-description h5 {
+    line-height: 1.3;
+}
+
+.card-condition {
+    grid-area: cd;
+}
+
+
+.card-date-add {
+    grid-area: dt;
+}
+
+.wrap-slide > div > .slick-arrow {
+    width: 50px;
+    height: 60px;
+    position: absolute;
+    top: 40%;
+}
+
+
+.card-condition, .card-date-add {
+    height: 50px;
+    font-size: 18px;
+    text-align: center;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding-top: 10px;
+}
+
+@media(max-width: 750px) {
+    .container-card-view {
+            grid-template-areas:
+        "hd"
+        "ph"
+        "op"
+        "cd"
+        "dt"
+        "ds";
+    }
+}

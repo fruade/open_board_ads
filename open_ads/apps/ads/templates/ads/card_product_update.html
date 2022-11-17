@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+	<div class="content100-form">
+        <span class="login100-form-title p-b-35 p-t-35">
+            Редактирование
+        </span>
+
+        <form action="" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+
+            {% if form.errors %}
+				{% for field in form %}
+					{% for error in field.errors %}
+						<div class="alert alert-error">
+							{{ error|escape }}
+						</div>
+					{% endfor %}
+				{% endfor %}
+				{% for error in form.non_field_errors %}
+					<div class="alert alert-error">
+						{{ error|escape }}
+					</div>
+				{% endfor %}
+			{% endif %}
+			<div class="wrap-input100 m-b-23">
+				<span class="label-input100" style="font-size: 16px">Название <span class="asteriskField">*</span></span>
+				{% render_field form.title class="input100" placeholder="Введите название" %}
+				<span class="focus-input100" data-symbol="✂"></span>
+			</div>
+            <div class="wrap-input100 m-b-23">
+				<span class="label-input100" style="font-size: 16px">Цена <span class="asteriskField">*</span></span>
+				{% render_field form.price class="input100" placeholder="Введите цену" %}
+				<span class="focus-input100" data-symbol="₽"></span>
+			</div>
+            <div class="wrap-input100 m-b-23">
+				<div class="label-input100 m-b-23" style="font-size: 16px">Состояние <span class="asteriskField">*</span></div>
+				{% render_field form.condition class="input100" %}
+			</div>
+            {{ form.description|as_crispy_field }}
+
+            <div class="m-b-23 m-t-23">
+				<div class="m-b-10" style="font-size: 16px">Фотографии (не более 6 фото) <span class="asteriskField">* </span></div>
+                <div class="files_style m-b-10">
+                {% render_field form.photos id="fln" name="files[]" %}
+                </div>
+                <div id="list"></div>
+			</div>
+
+
+            <div class="container-login100-form-btn">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <button type="submit" class="login100-form-btn" name="btnformlogin">
+                        Обновить
+                    </button>
+                </div>
+            </div>
+			<div class="container-login100-form-btn m-t-10">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn-del"></div>
+					<a class="login100-form-btn" href="{{ object.get_absolute_url }}delete">Удалить</a>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+{% endblock %}

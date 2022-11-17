@@ -1,0 +1,33 @@
+{% extends 'base_modal.html' %}
+{% load account %}
+{% block content %}
+	<div class="modal fade" id="logout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-body">
+            <div class="limiter">
+				<div class="container-logout" >
+					<div class="wrap-login100 p-l-55 p-r-55 p-t-17">
+						<form action="{% url 'account_logout' %}" method="POST" class="login100-form">
+							{% csrf_token %}
+							<span class="login100-form-title p-b-49" style="font-size: 20px">
+								Вы уверены, что хотите выйти?
+							</span>
+							<div class="container-login100-form-btn">
+								<div class="wrap-login100-form-btn">
+									<div class="login100-form-bgbtn"></div>
+									<button type="submit" class="login100-form-btn">
+										Выйти
+									</button>
+								</div>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+{% endblock %}
