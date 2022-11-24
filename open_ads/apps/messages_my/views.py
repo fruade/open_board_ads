@@ -1,61 +1,52 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.views import View
-from django.views.generic import CreateView
+from django.db.models import Count, Q
+from django.views.generic import CreateView, TemplateView
+from apps.ads.models import Card
 from apps.messages_my.forms import MessageForm
 from apps.messages_my.models import Message, Chat
-from random import randint
-from django import template
-register = template.Library()
 
 
-# class DialogsView(LoginRequiredMixin, View):
-#
-#     def get(self, request):
-#         chats = Chat.objects.filter(members__in=[request.user.id])
-#         return render(request, 'messages_my/dialogs.html', {'user_profile': request.user, 'chats': chats})
+class MessagesView(LoginRequiredMixin, CreateView):
+    model = Message
+    form_class = MessageForm
+    template_name = 'messages_my/create_message.html'
 
+    def get_success_url(self):
+        url = str(self.request.META.get('HTTP_REFERER')).split('/')
+        url = '/'.join(url[:-3]) + '/'
+        return url
 
-class MessagesView(LoginRequiredMixin, View):
-    def get(self, request, chat_id):
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        id_card = Card.objects.get(slug=self.kwargs['slug'])
         try:
-            chat = Chat.objects.get(id=chat_id)
-            if request.user in chat.members.all():
-                chat.message_set.filter(is_readed=False).exclude(author=request.user).update(is_readed=True)
-            else:
-                chat = None
+            print(self.kwargs)
+            chat = Chat.objects.get(Q(id_sender=self.kwargs['author_id']) &
+                                    Q(id_recipient=self.kwargs['user_id']) &
+                                    Q(id_card=id_card))
         except Chat.DoesNotExist:
             chat = None
 
-        return render(
-            request,
-            'messages_my/messages.html',
-            {
-                'user_profile': request.user,
-                'chat': chat,
-                'form': MessageForm()
-            }
-        )
+        if not chat:
+            chat = Chat.objects.create(
+                id_sender=self.kwargs['author_id'],
+                id_recipient=self.kwargs['user_id'],
+                id_card=id_card
+            )
 
-    def post(self, request, chat_id):
-        form = MessageForm(data=request.POST)
-        if form.is_valid():
-            message = form.save(commit=False)
-            message.chat_id = chat_id
-            message.author = request.user
-            message.save()
-        return redirect(reverse('users:messages', kwargs={'chat_id': chat_id}))
+        self.object.chat = chat
+        self.object.save()
+        return super().form_valid(form)
 
 
-class CreateDialogView(LoginRequiredMixin, View):
-    def get(self, request, user_id):
-        chats = Chat.objects.filter(members__in=[request.user.id, user_id], type=Chat.DIALOG).annotate(c=Count('members')).filter(c=2)
-        if chats.count() == 0:
-            chat = Chat.objects.create()
-            chat.members.add(request.user)
-            chat.members.add(user_id)
-        else:
-            chat = chats.first()
-        return redirect(reverse('users:messages', kwargs={'chat_id': chat.id}))
+class DialogView(LoginRequiredMixin, TemplateView):
+    model = Chat
+    template_name = 'messages_my/dialogs.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['dialogs'] = Chat.objects.filter(Q(id_sender=self.request.user.id) |
+                                                 Q(id_recipient=self.request.user.id))
+        return context
+
+

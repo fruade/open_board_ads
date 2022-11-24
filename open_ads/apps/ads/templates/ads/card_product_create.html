@@ -44,7 +44,8 @@
 				<div class="label-input100 m-b-23" style="font-size: 16px">Состояние <span class="asteriskField">*</span></div>
 				{% render_field form.condition class="input100" %}
 			</div>
-            {{ form.description|as_crispy_field }}
+			<span class="label-input100" style="padding-left: 3px;">Описание</span>
+            <div class="m-b-23 m-t-7">{{ form.description|safe }}</div>
 
             <div class="m-b-23 m-t-23">
 				<div class="m-b-10" style="font-size: 16px">Фотографии (не более 6 фото) <span class="asteriskField">* </span></div>
@@ -67,5 +68,6 @@
 
         </form>
     </div>
-
+<script type="text/javascript" src='{% static "ckeditor/ckeditor-init.js" %}'></script>
+<script type="text/javascript" src='{% static "ckeditor/ckeditor/ckeditor.js" %}'></script>
 {% endblock %}

@@ -3,6 +3,7 @@
 {% load widget_tweaks %}
 {% load thumbnail %}
 {% load crispy_forms_tags %}
+{% load digit_capacity %}
 
 {% block content %}
 <div id="wrap-grid">
@@ -22,7 +23,7 @@
         	</div>
         </div>
         <div class="card-author-info">
-			<div class="description-field price">Цена: {{ object.price }} ₽</div>
+			<div class="description-field price">Цена: {{ object.price|digit_cap }} ₽</div>
 			<div class="description-field call">
 				<div class="container-login100-form-btn">
 					<div class="wrap-login100-form-btn">
@@ -40,7 +41,11 @@
 				<div class="container-login100-form-btn ">
 					<div class="wrap-login100-form-btn">
 						<div class="login100-form-bgbtn-message"></div>
-						<a class="login100-form-btn" href="{% url 'create_dialog' object.id_user.id %}">Написать</a>
+						{% if user.is_authenticated %}
+							<a class="login100-form-btn" href="{{ object.get_absolute_url }}chat/{{ user.id }}-to-{{ object.id_user.id }}">Написать</a>
+						{% else %}
+							<a class="login100-form-btn" href="{% url 'account_login' %}">Написать</a>
+						{% endif %}
 					</div>
 				</div>
 			</div>
@@ -54,7 +59,7 @@
 
         </div>
 		<div class="card-description p-b-15">
-			<h5>{{ object.description }}</h5>
+			<h5>{{ object.description|safe }}</h5>
 		</div>
 		<div class="card-condition">
 			Состояние: {{ object.condition }}

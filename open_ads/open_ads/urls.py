@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('apps.categories.urls')),
     path('', include('apps.messages_my.urls')),
     path('feedback/', include('apps.feedback.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('favorites/', include('apps.favorites.urls')),
     path('accounts/', include('allauth.urls')),
 ]

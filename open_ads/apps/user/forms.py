@@ -1,3 +1,4 @@
+from captcha.fields import ReCaptchaField
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.core import exceptions, validators
@@ -7,6 +8,10 @@ from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
 from apps.user.models import User
+
+
+class MySignInForm(LoginForm):
+    captcha = ReCaptchaField()
 
 
 class MySignupForm(SignupForm):

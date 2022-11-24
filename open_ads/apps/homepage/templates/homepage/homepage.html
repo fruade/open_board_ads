@@ -16,6 +16,21 @@
     {% include 'inc/block_slider_categories.html' %}
 {% endblock %}
 
+{% block ordering %}
+    <div id="order_container">
+        <div id="order_c">
+        <div class="nice-select" tabindex="0">
+            <span class="current" style="font-family: Poppins; font-size: 16px;">по умолчанию</span>
+            <ul class="list">
+                <li data-value="-date_add" class="option selected">по умолчанию</li>
+                <li data-value="date_add" class="option">по дате добавления</li>
+                <li data-value="price" class="option">сначала дешевые</li>
+                <li data-value="-price" class="option">сначала дорогие</li>
+            </ul>
+        </div>
+        </div>
+    </div>
+{% endblock %}
 
 {% block card %}
     {% if page_obj %}

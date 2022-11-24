@@ -57,6 +57,9 @@ INSTALLED_APPS = [
     'django_mptt_admin',
     'django_filters',
     'mptt',
+    'ckeditor',
+    'ckeditor_uploader',
+    'captcha',
 
     'apps.homepage.apps.HomepageConfig',
     'apps.ads.apps.AdsConfig',
@@ -183,6 +186,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
 ACCOUNT_FORMS = {
     'signup': 'apps.user.forms.MySignupForm',
+    'login': 'apps.user.forms.MySignInForm',
 }
 
 SILENCED_SYSTEM_CHECKS = ["auth.W004"]
@@ -209,6 +213,10 @@ EMAIL_HOST_USER = 'open-ads@yandex.ru'
 EMAIL_HOST_PASSWORD = 'ayukloqoeueedcdf'
 DEFAULT_FROM_EMAIL = 'open-ads@yandex.ru'
 
+RECAPTCHA_PUBLIC_KEY = '6Lcv1BcjAAAAAJfRjOZf7E2U2jcXqu1Ri6pF6Hno'
+RECAPTCHA_PRIVATE_KEY = '6Lcv1BcjAAAAAKg65WyH3AH5grlwyrpC7ZVemAwo'
+RECAPTCHA_REQUIRED_SCORE = 0.85
+
 LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'Asia/Yekaterinburg'
@@ -220,7 +228,43 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            [
+                'Source',
+                '-','Undo', 'Redo',
+                '-', 'Bold', 'Italic', 'Underline',
+                '-', 'Link', 'Unlink', 'Anchor',
+                'Format',
+                '-', 'Maximize',
+                '-', 'Table',
+                '-', 'Image',
+                '-', 'NumberedList', 'BulletedList'
+            ],
+            [
+                'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',
+                '-', 'Outdent', 'Indent',
+                '-', 'HorizontalRule',
+                '-', 'Blockquote'
+            ]
+        ],
+        'language': 'ru',
+        'height': 200,
+        'width': 398,
+        'toolbarCanCollapse': False,
+        'forcePasteAsPlainText': True,
+        "removePlugins": "exportpdf",
+    }
+}
+
+
+
 STATIC_URL = 'static/'
+# STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -229,3 +273,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+

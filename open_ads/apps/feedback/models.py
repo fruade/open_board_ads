@@ -1,5 +1,5 @@
 from django.db import models
-
+from ckeditor.fields import RichTextField
 from apps.user.models import User
 
 
@@ -13,5 +13,4 @@ class FeedBack(models.Model):
                              verbose_name='Пользователь',
                              default=None
                              )
-    date_add = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
-    feedback = models.TextField(verbose_name='Отзыв и предложение')
+    feedback = models.TextField(verbose_name='Отзыв')

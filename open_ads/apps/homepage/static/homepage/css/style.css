@@ -58,7 +58,6 @@ input[type=file]:before {
     color: red;
 }
 
-
 .login100-social-item i {
     color: #fff;
 }
@@ -70,7 +69,7 @@ svg {
 .container {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+
   min-width: 100%;
   display: grid;
   grid-template: minmax(50px, auto) minmax(100px, auto) / 1fr;
@@ -82,6 +81,58 @@ svg {
     "footer"
 }
 
+.dialog {
+  overflow: hidden;
+  border-bottom: 2px solid grey;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "photo user date"
+    "photo title title"
+    "photo message message";
+}
+
+.dialog_photo {
+    grid-area: photo;
+    padding: 3px;
+}
+
+.dialog_user {
+    grid-area: user;
+}
+
+.dialog_title {
+    grid-area: title;
+
+}
+
+.dialog_message {
+    grid-area: message;
+}
+
+.dialog_date {
+    grid-area: date;
+    text-align: right;
+    font-size: 12px;
+}
+
+.message_container {
+    background-color: #f9f5ef;
+    position: relative;
+}
+.message_date {
+    position: absolute;
+    left: 75%;
+    bottom: 60%;
+    font-size: 12px;
+}
+.messages_user {
+    padding: 4px;
+}
+.messages_message {
+    padding-left: 10px;
+    padding-bottom: 4px;
+}
 
 .menu-element {
     display: none;
@@ -170,7 +221,6 @@ select .input100 {
     width: 100% !important;
     height: 100% !important;
     border: none !important;
-
 }
 
 
@@ -265,6 +315,19 @@ img .slick-prev, .slick-next {
   height: 50px;
 }
 
+#list > li > div > div > div {
+    height: 100%;
+    padding-top: 15%;
+}
+
+
+
+
+body > div.container > div > form > .label-input100 {
+    font-size: 16px;
+    margin-left: 3px;
+}
+
 .footer_feedback {
     width: 100%;
     margin-top: 20px;
@@ -293,15 +356,112 @@ body > div.container > header > form > div > div > div.select-category > div {
 }
 
 #div_id_rating, label{
-    padding-left: 3px;
     font-family: Poppins;
     font-size: 14px;
 }
 
+#id_feedback {
+    border: 2px solid rgba(0,0,0,.15);
+}
+
+.my_mess {
+    height: 100px;
+}
+
+.container-dialogs {
+    display: grid;
+    justify-content: center;
+}
+
+.dialogs {
+    padding: 2%;
+    width: 100%;
+    border-right: 2px solid grey;
+}
+.messages {
+    width: 100%;
+}
+
+.dialogs-wrapper {
+    font-family: Poppins;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    width: 600px;
+    height: 450px;
+    border: 3px solid grey;
+    border-radius: 5px;
+}
+
+#id_message {
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+
+
+
+
 #div_id_feedback, label{
-    padding-left: 3px;
     font-family: Poppins;
     font-size: 14px;
+}
+
+.cke_chrome {
+    border: 2px solid #d1d1d1;
+    border-radius: 5px;
+}
+
+.cke_bottom {
+    border-top: 2px solid #d1d1d1;
+}
+
+#id_rating {
+    border: 2px solid #d1d1d1;
+}
+
+body > div.container > div > form > span {
+
+    font-family: Poppins;
+}
+
+body > div.container > div > form > div:nth-child(5) > div.nice-select.input100 {
+    margin-bottom: 15px;
+    font-family: Poppins !important;
+}
+
+body > div.container > div > form > div.container-login100-form-btn{
+    margin-top: 28px;
+}
+
+#order_container {
+    display: grid;
+    justify-content: right;
+    padding-right: 10%;
+    background: #f9f5ef;
+    padding-bottom: 0px;
+}
+
+#order_c {
+    width: 160px;
+    background-color: #f9f5ef !important;
+    display: grid;
+    justify-content: end;
+}
+
+.main {
+    padding-top: 5px;
+}
+
+.nice-select {
+    background-color: #f9f5ef !important;
+}
+
+.g-recaptcha {
+    display: grid;
+    justify-content: center;
+}
+
+#cke_id_description {
+    width: 448px !important;
 }
 
 .footer_cat img {
@@ -483,6 +643,7 @@ footer {
   justify-items: end;
 }
 
+
 header, main, footer, .slider {
   padding: 20px 10%;
   background: #f9f5ef;
@@ -494,7 +655,7 @@ header, main, footer, .slider {
 }
 
 .slider {
-    padding-top: 0;
+    padding-top: 0px;
 }
 
 #list {
@@ -535,6 +696,7 @@ button .fa {
 .search {
     max-height: 100px;
     background: #f9f5ef;
+    margin-top: 35px;
 }
 
 .main-card {
@@ -550,7 +712,7 @@ input:-webkit-autofill {
 
 .card {
   position: relative;
-  border: 1px solid #353535;
+  border: 1.5px solid #353535;
   border-radius: 5px;
   background-color: #f9f5ef;
 }
@@ -563,8 +725,11 @@ input:-webkit-autofill {
 }
 
 @media(max-width: 1148px) {
-  header, main, footer {
+  header, main, footer, .slider, #order_container {
     padding: 20px 5%;
+  }
+  #order_container {
+    padding-bottom: 0;
   }
 }
 
@@ -597,7 +762,7 @@ input:-webkit-autofill {
         justify-items: center
     }
     .header {
-        height: 100%;
+        height: 400px;
     }
     #ip_city {
         text-align: center;
@@ -610,14 +775,16 @@ input:-webkit-autofill {
         border-right: 2px solid grey;
     }
 
-    header, main, footer {
+    header, main, footer, .slider, #order_container {
         padding: 20px 20%;
     }
-    .header {
-        height: 100%;
+    #order_container {
+    padding-bottom: 0;
     }
+
     .slider {
-        margin-top: 100px;
+        padding-top: 100px;
+        padding-bottom: 0;
     }
 
 }

@@ -5,7 +5,6 @@ from django.views import View
 from django.views.generic import ListView, DetailView, FormView, TemplateView
 from django.views.generic.edit import FormMixin
 from django_filters.views import FilterView
-
 from apps.ads.models import Card, CardPhoto
 from apps.ads.filters import CardFilter
 from apps.categories.models import Category
@@ -20,8 +19,11 @@ class HomePageView(FilterView):
     paginate_by = 10
     model = Card
     template_name = 'homepage/homepage.html'
-    context_object_name = 'slider_categories'
     filterset_class = CardFilter
+
+    def get_ordering(self):
+        ordering = self.request.GET.get('orderby')
+        return ordering
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from slugify import slugify
+from ckeditor.fields import RichTextField
 from apps.user.models import User
 from apps.categories.utils import upload_images
 from apps.categories.models import Category
@@ -34,7 +35,7 @@ class Card(models.Model):
                                  choices=CHOICES_CONDITION,
                                  default=CHOICES_CONDITION[0][0]
                                  )
-    description = models.TextField(blank=True, verbose_name='Описание')
+    description = RichTextField(verbose_name='Описание')
     date_add = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
     is_active = models.BooleanField(default=False, verbose_name='Архив')
     is_deleted = models.BooleanField(default=False, verbose_name='Удалить')
